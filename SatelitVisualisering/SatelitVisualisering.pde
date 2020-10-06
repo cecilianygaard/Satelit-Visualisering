@@ -42,15 +42,15 @@ void draw() {
     float phi = radians(lon) + PI;
 
     float x = (r+alt) * cos(theta) * cos(phi);
-    float y = (-r+alt) * sin(theta);
-    float z = (-r+alt) * cos(theta) * sin(phi);
+    float y = ((-r+alt)) * sin(theta);
+    float z = (-(r+alt)) * cos(theta) * sin(phi);
 
     println(" alt = " + alt + " lat = " + lat + "  lon = " + lon);
     println("x = " + x + " y = " + y + " z = " + z);
 
     pushMatrix();
     rotateY(angle);
-    angle += 0.01;
+    angle += 0.003;
     translate(x, y, z);
     //rotate(angleb, raxis.x, raxis.y, raxis.z);
     fill(255);
@@ -62,6 +62,6 @@ void draw() {
     noStroke();
     shape(globe);
     
-    text(10,10,10);
+    //text("timestamp: " + time, 50, 0, 350);
   }
 }
