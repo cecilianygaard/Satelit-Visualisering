@@ -14,7 +14,7 @@ PShape globe;
 
 void setup() {
   size(600, 600, P3D);
-  earth = loadImage("earth.jpg");
+  earth = loadImage("EarthPicture.jpg");
   // table = loadTable("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.csv", "header");
   table = loadTable("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", "header");
 
