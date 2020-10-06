@@ -61,5 +61,7 @@ void draw() {
     fill(200);
     noStroke();
     shape(globe);
+    
+    text(10,10,10);
   }
 }
