@@ -39,13 +39,13 @@ void draw() {
 
     float phi = radians(lon) + PI;
 
-    float h = pow(10, alt);
-    float maxh = pow(10, 7);
-    h = map(h, 0, maxh, 10, 100);
+    //float h = pow(10, alt);
+    //float maxh = pow(10, 7);
+    //h = map(h, 0, maxh, 10, 100);
  
-    float x = (r+h) * cos(theta) * cos(phi);
-    float y = (-r+h) * sin(theta);
-    float z = (-r+h) * cos(theta) * sin(phi);
+    float x = (r+alt) * cos(theta) * cos(phi);
+    float y = (-r+alt) * sin(theta);
+    float z = (-r+alt) * cos(theta) * sin(phi);
 
     PVector posi = new PVector(x, y, z);
 
@@ -56,10 +56,11 @@ void draw() {
     float angleb = PVector.angleBetween(xaxis, posi);
     PVector raxis = xaxis.cross(posi);
 
-    println("alt","lat","lon","time");
+    println(" alt = " + alt + " lat = " + lat + "  lon = " + lon);
+    println("x = " + x + " y = " + y + " z = " + z);
 
     pushMatrix();
-    //translate(x, y, z);
+    translate(x, y, z);
     //rotate(angleb, raxis.x, raxis.y, raxis.z);
     fill(255);
     box(10);
