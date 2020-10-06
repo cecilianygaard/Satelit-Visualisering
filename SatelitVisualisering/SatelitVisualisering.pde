@@ -1,12 +1,14 @@
 //https://www.n2yo.com/rest/v1/satellite/positions/25544/41.702/-76.014/0/2/&apiKey=STDH68-MXH7MF-EC5QEV-4KH4
 
 float angle;
+float earthAngle;
 
 JSONObject json;
 float r = 150;
 
 PImage earth;
 PShape globe;
+
 
 void setup() {
   size(1000, 1000, P3D);
@@ -18,10 +20,29 @@ void setup() {
   globe.setTexture(earth);
 }
 
+
 void draw() {
   background(51);
-  translate(width*0.5, height*0.5);
+  displayEarth();
+  displaySatelitte();
 
+  //text("timestamp: " + time, 50, 0, 350);
+
+  if (keyCode == LEFT && keyPressed == true) earthAngle -= 0.1;
+  if (keyCode == RIGHT && keyPressed == true) earthAngle += 0.1;
+}
+
+void displayEarth() {
+  translate(width*0.5, height*0.5);
+  lights();
+  fill(200);
+  noStroke();
+  shape(globe);
+  rotateY(earthAngle);
+}
+
+
+void displaySatelitte() {
   for (int i = 0; i < json.size(); i++) {
     JSONArray pos = json.getJSONArray("positions");
     JSONObject val = pos.getJSONObject(i);
@@ -37,8 +58,6 @@ void draw() {
     float y = ((-r+alt)) * sin(theta);
     float z = (-(r+alt)) * cos(theta) * sin(phi);
 
-    println(" alt = " + alt + " lat = " + lat + "  lon = " + lon);
-    println("x = " + x + " y = " + y + " z = " + z);
 
     pushMatrix();
     rotateY(angle);
@@ -48,14 +67,7 @@ void draw() {
     box(10);
     popMatrix();
 
-    lights();
-    fill(200);
-    noStroke();
-    shape(globe);
-
-    //text("timestamp: " + time, 50, 0, 350);
-
-    if (keyCode == LEFT && keyPressed == true) angle -= 0.1;
-    if (keyCode == RIGHT && keyPressed == true) angle += 0.1;
+    println(" alt = " + alt + " lat = " + lat + "  lon = " + lon);
+    println("x = " + x + " y = " + y + " z = " + z);
   }
 }
