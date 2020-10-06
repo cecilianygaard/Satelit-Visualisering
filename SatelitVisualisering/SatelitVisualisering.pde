@@ -22,14 +22,6 @@ void draw() {
   background(51);
   translate(width*0.5, height*0.5);
 
-  //rotateY(angle);
-  //angle += 0.01;
-
-  //lights();
-  //fill(200);
-  //noStroke();
-  //shape(globe);
-
   for (int i = 0; i < json.size(); i++) {
     JSONArray pos = json.getJSONArray("positions");
     JSONObject val = pos.getJSONObject(i);
@@ -52,7 +44,6 @@ void draw() {
     rotateY(angle);
     angle += 0.003;
     translate(x, y, z);
-    //rotate(angleb, raxis.x, raxis.y, raxis.z);
     fill(255);
     box(10);
     popMatrix();
