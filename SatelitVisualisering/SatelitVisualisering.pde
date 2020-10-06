@@ -6,7 +6,8 @@
 
 float angle;
 
-Table table;
+//Table table;
+JSONObject json;
 float r = 200;
 
 PImage earth;
@@ -16,8 +17,9 @@ void setup() {
   size(600, 600, P3D);
   earth = loadImage("EarthPicture.jpg");
   // table = loadTable("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.csv", "header");
-  table = loadTable("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", "header");
-
+  //table = loadTable("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", "header");
+    json = new JSONObject();
+    
   noStroke();
   globe = createShape(SPHERE, r);
   globe.setTexture(earth);
@@ -27,7 +29,7 @@ void draw() {
   background(51);
   translate(width*0.5, height*0.5);
   rotateY(angle);
-  angle += 0.05;
+  angle += 0.01;
 
   lights();
   fill(200);
