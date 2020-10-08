@@ -28,8 +28,9 @@ void draw() {
 
   //text("timestamp: " + time, 50, 0, 350);
 
-  if (keyCode == LEFT && keyPressed == true) earthAngle -= 0.1;
-  if (keyCode == RIGHT && keyPressed == true) earthAngle += 0.1;
+  if (keyCode == LEFT && keyPressed == true) earthAngle -= 0.01;
+  if (keyCode == RIGHT && keyPressed == true) earthAngle += 0.01;
+  if (keyPressed == false) earthAngle = 0;
 }
 
 void displayEarth() {
@@ -38,7 +39,7 @@ void displayEarth() {
   fill(200);
   noStroke();
   shape(globe);
-  rotateY(earthAngle);
+  globe.rotateY(earthAngle);
 }
 
 
@@ -57,7 +58,6 @@ void displaySatelitte() {
     float x = (r+alt) * cos(theta) * cos(phi);
     float y = ((-r+alt)) * sin(theta);
     float z = (-(r+alt)) * cos(theta) * sin(phi);
-
 
     pushMatrix();
     rotateY(angle);
