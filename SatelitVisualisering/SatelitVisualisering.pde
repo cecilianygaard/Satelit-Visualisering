@@ -4,9 +4,10 @@ float angle;
 float earthAngle;
 
 JSONObject json;
-float r = 150;
+float r = 130;
 
 PImage earth;
+PImage background;
 PShape globe;
 
 PFont f;
@@ -15,7 +16,7 @@ PFont f;
 
 
 void setup() {
-  size(1000, 1000, P3D);
+  size(852, 480, P3D);
   f = createFont("Arial", 16, true);
   earth = loadImage("EarthPicture.jpg");
 
@@ -26,11 +27,8 @@ void setup() {
 }
 
 void draw() {
-  background(51);
-  textFont(f, 16);
-  textSize(25);
+  background(loadImage("SolarSystemBackgroundPicture.jpg"));
   fill(200);
-  text("TIMESTAMP = 1602072382", 15, 40);
   displayEarth();
   displaySatelitte();
 
@@ -51,24 +49,35 @@ void displayEarth() {
 
 
 void displaySatelitte() {
-  for (int i = 0; i < json.size(); i++) {
+  for (int i = 1; i < json.size(); i++) {
     JSONArray pos = json.getJSONArray("positions");
     JSONObject val = pos.getJSONObject(i);
+    
     float lat = val.getFloat("satlatitude");
     float lon = val.getFloat("satlongitude");
     float alt = val.getFloat("sataltitude");
     float time = val.getFloat("timestamp");
 
+    textSize(15);
+    text("TIMESTAMP: " + time, -400, -205);
+
+
     float theta = radians(lat);
     float phi = radians(lon) + PI;
 
     float x = (r+alt) * cos(theta) * cos(phi);
-    float y = ((-r+alt)) * sin(theta);
-    float z = (-(r+alt)) * cos(theta) * sin(phi);
+    float y = r * sin(theta);
+    float z = r * cos(theta) * sin(phi);
+
+    PVector posi = new PVector(x, y, z);
+
+    PVector xaxis = new PVector(1, 0, 0);
+    float angleb = PVector.angleBetween(xaxis, posi);
+    PVector raxis = xaxis.cross(posi);
+
 
     pushMatrix();
-    rotateY(angle);
-    angle += 0.003;
+    rotate(angleb, raxis.x, raxis.y, raxis.z);
     translate(x, y, z);
     fill(255);
     box(10);
