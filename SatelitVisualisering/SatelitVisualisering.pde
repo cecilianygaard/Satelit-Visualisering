@@ -26,9 +26,9 @@ void setup() {
 void draw() {
   background(51);
   textFont(f, 16);
-  textSize(30);
+  textSize(25);
   fill(200);
-  text("timestamp = 1602072382", 10, 100);
+  text("TIMESTAMP = 1602072382", 15, 40);
   displayEarth();
   displaySatelitte();
 
