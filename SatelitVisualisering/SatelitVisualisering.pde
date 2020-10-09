@@ -9,9 +9,14 @@ float r = 150;
 PImage earth;
 PShape globe;
 
+PFont f;
+
+
+
 
 void setup() {
   size(1000, 1000, P3D);
+  f = createFont("Arial", 16, true);
   earth = loadImage("EarthPicture.jpg");
 
   json = loadJSONObject("https://www.n2yo.com/rest/v1/satellite/positions/25544/41.702/-76.014/0/2/&apiKey=STDH68-MXH7MF-EC5QEV-4KH4");
@@ -20,13 +25,15 @@ void setup() {
   globe.setTexture(earth);
 }
 
-
 void draw() {
   background(51);
+  textFont(f, 16);
+  textSize(30);
+  fill(200);
+  text("timestamp = 1602072382", 10, 100);
   displayEarth();
   displaySatelitte();
 
-  //text("timestamp: " + time, 50, 0, 350);
 
   if (keyCode == LEFT && keyPressed == true) earthAngle -= 0.01;
   if (keyCode == RIGHT && keyPressed == true) earthAngle += 0.01;
