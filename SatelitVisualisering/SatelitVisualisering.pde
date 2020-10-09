@@ -12,8 +12,6 @@ PShape globe;
 PFont f;
 
 
-
-
 void setup() {
   size(1000, 1000, P3D);
   f = createFont("Arial", 16, true);
