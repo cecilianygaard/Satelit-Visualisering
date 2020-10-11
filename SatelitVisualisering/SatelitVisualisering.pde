@@ -17,7 +17,7 @@ PFont f;
 float lat = 0;
 float lon = 0;
 float alt = 0;
-float time = 0;
+long time = 0;
 
 float timeInterval;
 float lastTimeCheck;
@@ -39,7 +39,7 @@ void getSatCoordinates() {
     lat = val.getFloat("satlatitude");
     lon = val.getFloat("satlongitude");
     alt = val.getFloat("sataltitude");
-    time = val.getFloat("timestamp");
+    time = val.getLong("timestamp");
   }
   lastTimeCheck = millis();
 }
