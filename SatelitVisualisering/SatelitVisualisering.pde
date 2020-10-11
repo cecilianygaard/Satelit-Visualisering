@@ -1,4 +1,6 @@
 //https://www.n2yo.com/rest/v1/satellite/positions/25544/41.702/-76.014/0/2/&apiKey=STDH68-MXH7MF-EC5QEV-4KH4
+import java.util.*;
+import java.text.*;
 
 float angle;
 float earthAngle;
@@ -50,14 +52,14 @@ void displaySatelitte() {
   for (int i = 1; i < json.size(); i++) {
     JSONArray pos = json.getJSONArray("positions");
     JSONObject val = pos.getJSONObject(i);
-    
+
     float lat = val.getFloat("satlatitude");
     float lon = val.getFloat("satlongitude");
     float alt = val.getFloat("sataltitude");
     float time = val.getFloat("timestamp");
 
     textSize(15);
-    text("TIMESTAMP: " + time, -400, -205);
+    text("TIMESTAMP: " + epochToDateTime((long)time*1000L), -400, -205);
 
 
     float theta = radians(lat);
@@ -84,4 +86,11 @@ void displaySatelitte() {
     println(" alt = " + alt + " lat = " + lat + "  lon = " + lon);
     println("x = " + x + " y = " + y + " z = " + z);
   }
+}
+
+String epochToDateTime(long epoch) {
+  Date date = new Date(epoch);
+  DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+  format.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+  return(format.format(date));
 }
